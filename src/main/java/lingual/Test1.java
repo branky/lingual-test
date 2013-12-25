@@ -22,15 +22,15 @@ public class Test1 {
 
     public void run() throws IOException
     {
-        String statement = "select e.\"NAME\", sum(s.\"SALE_AMT\")\n"
+        String statement = "select a.\"NAME\", sum(s.\"SALE_AMT\")\n"
                 + "from \"example\".\"sales_fact_1997\" as s\n"
-                + "join \"example\".\"employee\" as e\n"
-                + "on e.\"EMPID\" = s.\"EMP_ID\"\n"
+                + "join \"example\".\"area\" as a\n"
+                + "on a.\"ID\" = s.\"AREA_ID\"\n"
                 + "where s.\"SALE_QTR\" in ('Q1', 'Q2') "
-                + "group by e.\"NAME\"";
+                + "group by a.\"NAME\"";
 
         Tap empTap = new Hfs( new SQLTypedTextDelimited( ",", "\"" ),
-                "data/employee.tcsv", SinkMode.KEEP );
+                "data/area.tcsv", SinkMode.KEEP );
         Tap salesTap = new Hfs( new SQLTypedTextDelimited( ",", "\"" ),
                 "data/sales_fact_1997.tcsv", SinkMode.KEEP );
 
@@ -39,7 +39,7 @@ public class Test1 {
 
         FlowDef flowDef = FlowDef.flowDef()
                 .setName( "sql flow" )
-                .addSource( "example.employee", empTap )
+                .addSource( "example.area", empTap )
                 .addSource( "example.sales_fact_1997", salesTap )
                 .addSink( "results", resultsTap );
 

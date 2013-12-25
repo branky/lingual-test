@@ -1,0 +1,4 @@
+ID:int,NAME:string
+100,"US"
+200,"EU"
+150,"APEC"

@@ -1,4 +1,4 @@
-EMP_ID:int,SALE_AMT:int,SALE_QTR:string
+AREA_ID:int,SALE_AMT:int,SALE_QTR:string
 100,10,Q1
 150,20,Q1
 100,20,Q2
